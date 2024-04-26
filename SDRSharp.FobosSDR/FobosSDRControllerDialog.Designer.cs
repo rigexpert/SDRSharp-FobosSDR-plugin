@@ -307,7 +307,7 @@
             this.Name = "FobosSDRControllerDialog";
             this.Text = "Fobos SDR Controller";
             this.TopMost = true;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.EOTAControllerDialog_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FobosSDRControllerDialog_FormClosing);
             this.VisibleChanged += new System.EventHandler(this.FobosSDRControllerDialog_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_LNA)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_VGA)).EndInit();

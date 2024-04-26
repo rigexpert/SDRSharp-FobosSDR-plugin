@@ -44,7 +44,7 @@ namespace SDRSharp.FobosSDR
         //======================================================================
         public FobosSDRIO()
         {
-            //ConsoleHelper.CreateConsole();
+//            ConsoleHelper.CreateConsole();
             _index = -1;
             _gui = new FobosSDRControllerDialog(this);
         }
@@ -159,9 +159,11 @@ namespace SDRSharp.FobosSDR
         public void ShowSettingGUI(IWin32Window parent)
         {
             _main = (SDRSharp.MainForm)parent;
-            Console.WriteLine(parent.ToString());
+            Console.WriteLine("parent: "+parent.ToString());
             UpdateMainForm();
+            Console.WriteLine("show");
             _gui.Show();
+            Console.WriteLine("ok");
         }
         //======================================================================
         public void HideSettingGUI()
@@ -371,6 +373,15 @@ namespace SDRSharp.FobosSDR
             _callback(this, e.Buffer, e.Length);
         }
         //======================================================================
+        public bool IsOpen
+        {
+            get
+            {
+                return (_dev != null);
+            }
+        }
+        //======================================================================
+
         public bool IsStreaming
         {
             get

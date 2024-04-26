@@ -1,0 +1,1 @@
+add key="Fobos SDR" value="SDRSharp.FobosSDR.FobosSDRIO,SDRSharp.FobosSDR" />

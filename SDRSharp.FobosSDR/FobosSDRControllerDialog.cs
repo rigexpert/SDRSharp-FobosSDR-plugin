@@ -1,4 +1,18 @@
-﻿using SDRSharp.Radio;
+﻿//==============================================================================
+//       _____     __           _______
+//      /  __  \  /_/          /  ____/                                __
+//     /  /_ / / _   ____     / /__  __  __   ____    ____    ____   _/ /_
+//    /    __ / / / /  _  \  / ___/  \ \/ /  / __ \  / __ \  / ___\ /  _/
+//   /  /\ \   / / /  /_/ / / /___   /   /  / /_/ / /  ___/ / /     / /_
+//  /_ /  \_\ /_/  \__   / /______/ /_/\_\ / ____/  \____/ /_/      \___/
+//               /______/                 /_/             
+//  Fobos SDR API library
+//  C# .Net API wrapper for SDR# plugin
+//  Copyright (C) Rig Expert Ukraine Ltd.
+//  2024.04.04
+//  2024.04.25 - update
+//==============================================================================
+using SDRSharp.Radio;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,8 +31,6 @@ namespace SDRSharp.FobosSDR
         private bool _initialized;
         public FobosSDRControllerDialog(FobosSDRIO owner)
         {
-
-            //ConsoleHelper.CreateConsole();
 
             try
             {
@@ -81,7 +93,7 @@ namespace SDRSharp.FobosSDR
             Close();
         }
 
-        private void EOTAControllerDialog_FormClosing(object sender, FormClosingEventArgs e)
+        private void FobosSDRControllerDialog_FormClosing(object sender, FormClosingEventArgs e)
         {
             e.Cancel = true;
             Hide();
@@ -136,23 +148,23 @@ namespace SDRSharp.FobosSDR
         {
             if (Visible)
             {
-                samplerateComboBox.Enabled = !_owner.Device.IsStreaming;
-                deviceComboBox.Enabled = !_owner.Device.IsStreaming;
-
-                if (!_owner.Device.IsStreaming)
+                if (_owner.IsOpen)
                 {
-                    var devices = _owner.GetActiveDevices();
-                    deviceComboBox.Items.Clear();
-                    deviceComboBox.Items.AddRange(devices);
-
-                    for (var i = 0; i < devices.Length; i++)
+                    if (!_owner.Device.IsStreaming)
                     {
-                        if (i == _owner.Device.Index)
+                        var devices = _owner.GetActiveDevices();
+                        deviceComboBox.Items.Clear();
+                        deviceComboBox.Items.AddRange(devices);
+
+                        for (var i = 0; i < devices.Length; i++)
                         {
-                            _initialized = false;
-                            deviceComboBox.SelectedIndex = i;
-                            _initialized = true;
-                            break;
+                            if (i == _owner.Device.Index)
+                            {
+                                _initialized = false;
+                                deviceComboBox.SelectedIndex = i;
+                                _initialized = true;
+                                break;
+                            }
                         }
                     }
                 }
@@ -177,10 +189,6 @@ namespace SDRSharp.FobosSDR
             }
         }
 
-        private void CheckBox_DirectSampling_CheckedChanged(object sender, EventArgs e)
-        {
-        }
-
         private void CheckBox_ExternalClock_CheckedChanged(object sender, EventArgs e)
         {
             if (_owner != null)
@@ -194,15 +202,30 @@ namespace SDRSharp.FobosSDR
         {
             if (_owner != null)
             {
-                samplerateComboBox.Enabled = !_owner.IsStreaming;
-                deviceComboBox.Enabled = !_owner.IsStreaming;
-                TextBox_CenterFrequency.Enabled = (_owner.SamplingMode == 0) || (_owner.SamplingMode == 1);
-                button_SetCenterFrequency.Enabled = (_owner.SamplingMode == 0) || (_owner.SamplingMode == 1);
-                TrackBar_LNA.Enabled = (_owner.SamplingMode == 0);
-                TrackBar_VGA.Enabled = (_owner.SamplingMode == 0);
-                if ((!TextBox_CenterFrequency.Focused) && (!this.Focused) && (!button_SetCenterFrequency.Focused))
+                if (_owner.IsOpen)
                 {
-                    TextBox_CenterFrequency.Text = Convert.ToString(_owner.Frequency);
+                    ComboBox_Input.Enabled = true;
+                    samplerateComboBox.Enabled = !_owner.IsStreaming;
+                    deviceComboBox.Enabled = !_owner.IsStreaming;
+                    TextBox_CenterFrequency.Enabled = (_owner.SamplingMode == 0) || (_owner.SamplingMode == 1);
+                    button_SetCenterFrequency.Enabled = (_owner.SamplingMode == 0) || (_owner.SamplingMode == 1);
+                    TrackBar_LNA.Enabled = (_owner.SamplingMode == 0);
+                    TrackBar_VGA.Enabled = (_owner.SamplingMode == 0);
+                    if ((!TextBox_CenterFrequency.Focused) && (!this.Focused) && (!button_SetCenterFrequency.Focused))
+                    {
+                        TextBox_CenterFrequency.Text = Convert.ToString(_owner.Frequency);
+                    }
+                    CheckBox_ExternalClock.Enabled = true;
+                }
+                else
+                {
+                    ComboBox_Input.Enabled = false;
+                    samplerateComboBox.Enabled = false;
+                    TextBox_CenterFrequency.Enabled = false;
+                    button_SetCenterFrequency.Enabled = false;
+                    TrackBar_LNA.Enabled = false;
+                    TrackBar_VGA.Enabled = false;
+                    CheckBox_ExternalClock.Enabled = false;
                 }
             }
         }

@@ -10,6 +10,7 @@
 //  C# .Net API wrapper for SDR# plugin
 //  Copyright (C) Rig Expert Ukraine Ltd.
 //  2024.04.04
+//  2024.04.25 - update
 //==============================================================================
 using SDRSharp.Radio;
 using System;
