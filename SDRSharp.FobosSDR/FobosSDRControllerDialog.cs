@@ -29,6 +29,7 @@ namespace SDRSharp.FobosSDR
     {
         private readonly FobosSDRIO _owner;
         private bool _initialized;
+        private string[] _lna = { "none", "0dB", "16dB", "33dB" };
         public FobosSDRControllerDialog(FobosSDRIO owner)
         {
 
@@ -243,6 +244,20 @@ namespace SDRSharp.FobosSDR
             }
             Utils.SaveSetting("FobosSDR.SamplingMode", ComboBox_Input.SelectedIndex);
 
+        }
+
+        private void checkBox_GPO0_CheckedChanged(object sender, EventArgs e)
+        {
+            int gpo_value = 0;
+            gpo_value |= (Convert.ToInt32(checkBox_GPO0.Checked) << 0);
+            gpo_value |= (Convert.ToInt32(checkBox_GPO1.Checked) << 1);
+            gpo_value |= (Convert.ToInt32(checkBox_GPO2.Checked) << 2);
+            gpo_value |= (Convert.ToInt32(checkBox_GPO3.Checked) << 3);
+            gpo_value |= (Convert.ToInt32(checkBox_GPO4.Checked) << 4);
+            gpo_value |= (Convert.ToInt32(checkBox_GPO5.Checked) << 5);
+            gpo_value |= (Convert.ToInt32(checkBox_GPO6.Checked) << 6);
+            gpo_value |= (Convert.ToInt32(checkBox_GPO7.Checked) << 7);
+            _owner.SetUserGPO(gpo_value);
         }
     }
 }

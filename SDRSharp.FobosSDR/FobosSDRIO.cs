@@ -44,7 +44,7 @@ namespace SDRSharp.FobosSDR
         //======================================================================
         public FobosSDRIO()
         {
-//            ConsoleHelper.CreateConsole();
+            //ConsoleHelper.CreateConsole();
             _index = -1;
             _gui = new FobosSDRControllerDialog(this);
         }
@@ -109,7 +109,7 @@ namespace SDRSharp.FobosSDR
                     _dev.LNAgain = _LNA_Gain;
                     _dev.VGAgain = _VGA_Gain;
                     ApiInfo = "lib v." + _dev.lib_version + " drv " + _dev.drv_version;
-                    BoardInfo = "HW: rev." + _dev.hw_revision + " FV: v." + _dev.fw_version;
+                    BoardInfo = "HW: r." + _dev.hw_revision + " FV: v." + _dev.fw_version;
                     Serial = _dev.serial;
                     _dev.SamplesAvailable += SamplesAvailableEvent;
                 }
@@ -428,6 +428,14 @@ namespace SDRSharp.FobosSDR
                     _main.CenterFrequency = (long)_frequency;
                 }
                 Console.WriteLine("_main.CenterFrequency = " + _main.CenterFrequency);
+            }
+        }
+        //======================================================================
+        public void SetUserGPO(Int32 value)
+        {
+            if (_dev != null)
+            {
+                _dev.UserGPO = value;
             }
         }
         //======================================================================

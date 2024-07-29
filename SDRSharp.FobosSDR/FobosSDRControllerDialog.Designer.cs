@@ -52,6 +52,15 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.ComboBox_Input = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.checkBox_GPO0 = new System.Windows.Forms.CheckBox();
+            this.checkBox_GPO1 = new System.Windows.Forms.CheckBox();
+            this.checkBox_GPO2 = new System.Windows.Forms.CheckBox();
+            this.checkBox_GPO3 = new System.Windows.Forms.CheckBox();
+            this.checkBox_GPO4 = new System.Windows.Forms.CheckBox();
+            this.checkBox_GPO5 = new System.Windows.Forms.CheckBox();
+            this.checkBox_GPO6 = new System.Windows.Forms.CheckBox();
+            this.checkBox_GPO7 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_LNA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_VGA)).BeginInit();
             this.SuspendLayout();
@@ -62,7 +71,7 @@
             this.deviceComboBox.FormattingEnabled = true;
             this.deviceComboBox.Location = new System.Drawing.Point(12, 25);
             this.deviceComboBox.Name = "deviceComboBox";
-            this.deviceComboBox.Size = new System.Drawing.Size(269, 21);
+            this.deviceComboBox.Size = new System.Drawing.Size(276, 21);
             this.deviceComboBox.TabIndex = 0;
             this.deviceComboBox.SelectedIndexChanged += new System.EventHandler(this.deviceComboBox_SelectedIndexChanged);
             // 
@@ -97,12 +106,8 @@
             "16 MSpS",
             "12.5 MSpS",
             "10 MSpS",
-            "8 MSpS",
-            "6.4 MSpS",
-            "6.25 MSpS",
-            "5 MSpS",
-            "4 MSpS"});
-            this.samplerateComboBox.Location = new System.Drawing.Point(124, 184);
+            "8 MSpS"});
+            this.samplerateComboBox.Location = new System.Drawing.Point(131, 184);
             this.samplerateComboBox.Name = "samplerateComboBox";
             this.samplerateComboBox.Size = new System.Drawing.Size(157, 21);
             this.samplerateComboBox.TabIndex = 3;
@@ -130,7 +135,7 @@
             // 
             // close
             // 
-            this.close.Location = new System.Drawing.Point(203, 279);
+            this.close.Location = new System.Drawing.Point(213, 313);
             this.close.Name = "close";
             this.close.Size = new System.Drawing.Size(75, 23);
             this.close.TabIndex = 7;
@@ -166,9 +171,9 @@
             // TextBox_API
             // 
             this.TextBox_API.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.TextBox_API.Location = new System.Drawing.Point(58, 52);
+            this.TextBox_API.Location = new System.Drawing.Point(50, 52);
             this.TextBox_API.Name = "TextBox_API";
-            this.TextBox_API.Size = new System.Drawing.Size(223, 20);
+            this.TextBox_API.Size = new System.Drawing.Size(238, 20);
             this.TextBox_API.TabIndex = 24;
             // 
             // label3
@@ -192,9 +197,9 @@
             // TextBox_Board
             // 
             this.TextBox_Board.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.TextBox_Board.Location = new System.Drawing.Point(58, 78);
+            this.TextBox_Board.Location = new System.Drawing.Point(50, 78);
             this.TextBox_Board.Name = "TextBox_Board";
-            this.TextBox_Board.Size = new System.Drawing.Size(223, 20);
+            this.TextBox_Board.Size = new System.Drawing.Size(238, 20);
             this.TextBox_Board.TabIndex = 26;
             // 
             // label8
@@ -209,15 +214,15 @@
             // TextBox_Serial
             // 
             this.TextBox_Serial.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.TextBox_Serial.Location = new System.Drawing.Point(58, 104);
+            this.TextBox_Serial.Location = new System.Drawing.Point(50, 104);
             this.TextBox_Serial.Name = "TextBox_Serial";
-            this.TextBox_Serial.Size = new System.Drawing.Size(223, 20);
+            this.TextBox_Serial.Size = new System.Drawing.Size(238, 20);
             this.TextBox_Serial.TabIndex = 28;
             // 
             // CheckBox_ExternalClock
             // 
             this.CheckBox_ExternalClock.AutoSize = true;
-            this.CheckBox_ExternalClock.Location = new System.Drawing.Point(15, 279);
+            this.CheckBox_ExternalClock.Location = new System.Drawing.Point(13, 316);
             this.CheckBox_ExternalClock.Name = "CheckBox_ExternalClock";
             this.CheckBox_ExternalClock.Size = new System.Drawing.Size(93, 17);
             this.CheckBox_ExternalClock.TabIndex = 31;
@@ -227,7 +232,7 @@
             // 
             // button_SetCenterFrequency
             // 
-            this.button_SetCenterFrequency.Location = new System.Drawing.Point(237, 155);
+            this.button_SetCenterFrequency.Location = new System.Drawing.Point(247, 155);
             this.button_SetCenterFrequency.Name = "button_SetCenterFrequency";
             this.button_SetCenterFrequency.Size = new System.Drawing.Size(41, 23);
             this.button_SetCenterFrequency.TabIndex = 32;
@@ -238,7 +243,7 @@
             // 
             // TextBox_CenterFrequency
             // 
-            this.TextBox_CenterFrequency.Location = new System.Drawing.Point(94, 158);
+            this.TextBox_CenterFrequency.Location = new System.Drawing.Point(104, 158);
             this.TextBox_CenterFrequency.Name = "TextBox_CenterFrequency";
             this.TextBox_CenterFrequency.Size = new System.Drawing.Size(137, 20);
             this.TextBox_CenterFrequency.TabIndex = 33;
@@ -261,7 +266,7 @@
             "IQ (HF1+HF2) direct sampling",
             "HF1 direct sampling",
             "HF2 direct sampling"});
-            this.ComboBox_Input.Location = new System.Drawing.Point(95, 130);
+            this.ComboBox_Input.Location = new System.Drawing.Point(104, 130);
             this.ComboBox_Input.Name = "ComboBox_Input";
             this.ComboBox_Input.Size = new System.Drawing.Size(184, 21);
             this.ComboBox_Input.TabIndex = 35;
@@ -276,11 +281,117 @@
             this.label9.TabIndex = 36;
             this.label9.Text = "Input";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(9, 284);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(33, 13);
+            this.label10.TabIndex = 37;
+            this.label10.Text = "GPO:";
+            // 
+            // checkBox_GPO0
+            // 
+            this.checkBox_GPO0.AutoSize = true;
+            this.checkBox_GPO0.Location = new System.Drawing.Point(42, 283);
+            this.checkBox_GPO0.Name = "checkBox_GPO0";
+            this.checkBox_GPO0.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_GPO0.TabIndex = 38;
+            this.checkBox_GPO0.Text = "0";
+            this.checkBox_GPO0.UseVisualStyleBackColor = true;
+            this.checkBox_GPO0.CheckedChanged += new System.EventHandler(this.checkBox_GPO0_CheckedChanged);
+            // 
+            // checkBox_GPO1
+            // 
+            this.checkBox_GPO1.AutoSize = true;
+            this.checkBox_GPO1.Location = new System.Drawing.Point(73, 283);
+            this.checkBox_GPO1.Name = "checkBox_GPO1";
+            this.checkBox_GPO1.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_GPO1.TabIndex = 39;
+            this.checkBox_GPO1.Text = "1";
+            this.checkBox_GPO1.UseVisualStyleBackColor = true;
+            this.checkBox_GPO1.CheckedChanged += new System.EventHandler(this.checkBox_GPO0_CheckedChanged);
+            // 
+            // checkBox_GPO2
+            // 
+            this.checkBox_GPO2.AutoSize = true;
+            this.checkBox_GPO2.Location = new System.Drawing.Point(104, 283);
+            this.checkBox_GPO2.Name = "checkBox_GPO2";
+            this.checkBox_GPO2.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_GPO2.TabIndex = 40;
+            this.checkBox_GPO2.Text = "2";
+            this.checkBox_GPO2.UseVisualStyleBackColor = true;
+            this.checkBox_GPO2.CheckedChanged += new System.EventHandler(this.checkBox_GPO0_CheckedChanged);
+            // 
+            // checkBox_GPO3
+            // 
+            this.checkBox_GPO3.AutoSize = true;
+            this.checkBox_GPO3.Location = new System.Drawing.Point(134, 283);
+            this.checkBox_GPO3.Name = "checkBox_GPO3";
+            this.checkBox_GPO3.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_GPO3.TabIndex = 41;
+            this.checkBox_GPO3.Text = "3";
+            this.checkBox_GPO3.UseVisualStyleBackColor = true;
+            this.checkBox_GPO3.CheckedChanged += new System.EventHandler(this.checkBox_GPO0_CheckedChanged);
+            // 
+            // checkBox_GPO4
+            // 
+            this.checkBox_GPO4.AutoSize = true;
+            this.checkBox_GPO4.Location = new System.Drawing.Point(165, 283);
+            this.checkBox_GPO4.Name = "checkBox_GPO4";
+            this.checkBox_GPO4.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_GPO4.TabIndex = 42;
+            this.checkBox_GPO4.Text = "4";
+            this.checkBox_GPO4.UseVisualStyleBackColor = true;
+            this.checkBox_GPO4.CheckedChanged += new System.EventHandler(this.checkBox_GPO0_CheckedChanged);
+            // 
+            // checkBox_GPO5
+            // 
+            this.checkBox_GPO5.AutoSize = true;
+            this.checkBox_GPO5.Location = new System.Drawing.Point(197, 283);
+            this.checkBox_GPO5.Name = "checkBox_GPO5";
+            this.checkBox_GPO5.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_GPO5.TabIndex = 43;
+            this.checkBox_GPO5.Text = "5";
+            this.checkBox_GPO5.UseVisualStyleBackColor = true;
+            this.checkBox_GPO5.CheckedChanged += new System.EventHandler(this.checkBox_GPO0_CheckedChanged);
+            // 
+            // checkBox_GPO6
+            // 
+            this.checkBox_GPO6.AutoSize = true;
+            this.checkBox_GPO6.Location = new System.Drawing.Point(231, 283);
+            this.checkBox_GPO6.Name = "checkBox_GPO6";
+            this.checkBox_GPO6.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_GPO6.TabIndex = 44;
+            this.checkBox_GPO6.Text = "6";
+            this.checkBox_GPO6.UseVisualStyleBackColor = true;
+            this.checkBox_GPO6.CheckedChanged += new System.EventHandler(this.checkBox_GPO0_CheckedChanged);
+            // 
+            // checkBox_GPO7
+            // 
+            this.checkBox_GPO7.AutoSize = true;
+            this.checkBox_GPO7.Location = new System.Drawing.Point(264, 283);
+            this.checkBox_GPO7.Name = "checkBox_GPO7";
+            this.checkBox_GPO7.Size = new System.Drawing.Size(32, 17);
+            this.checkBox_GPO7.TabIndex = 45;
+            this.checkBox_GPO7.Text = "7";
+            this.checkBox_GPO7.UseVisualStyleBackColor = true;
+            this.checkBox_GPO7.CheckedChanged += new System.EventHandler(this.checkBox_GPO0_CheckedChanged);
+            // 
             // FobosSDRControllerDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(293, 315);
+            this.ClientSize = new System.Drawing.Size(299, 345);
+            this.Controls.Add(this.checkBox_GPO7);
+            this.Controls.Add(this.checkBox_GPO6);
+            this.Controls.Add(this.checkBox_GPO5);
+            this.Controls.Add(this.checkBox_GPO4);
+            this.Controls.Add(this.checkBox_GPO3);
+            this.Controls.Add(this.checkBox_GPO2);
+            this.Controls.Add(this.checkBox_GPO1);
+            this.Controls.Add(this.checkBox_GPO0);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.ComboBox_Input);
             this.Controls.Add(this.close);
@@ -341,5 +452,14 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox ComboBox_Input;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.CheckBox checkBox_GPO0;
+        private System.Windows.Forms.CheckBox checkBox_GPO1;
+        private System.Windows.Forms.CheckBox checkBox_GPO2;
+        private System.Windows.Forms.CheckBox checkBox_GPO3;
+        private System.Windows.Forms.CheckBox checkBox_GPO4;
+        private System.Windows.Forms.CheckBox checkBox_GPO5;
+        private System.Windows.Forms.CheckBox checkBox_GPO6;
+        private System.Windows.Forms.CheckBox checkBox_GPO7;
     }
 }

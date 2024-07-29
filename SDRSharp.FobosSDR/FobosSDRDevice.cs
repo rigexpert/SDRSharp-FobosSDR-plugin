@@ -38,6 +38,7 @@ namespace SDRSharp.FobosSDR
         private int _external_clock = 0;
         private int _LNA_Gain = 0;
         private int _VGA_Gain = 0;
+        private int _UserGPO = 0;
 
         private GCHandle _gcHandle;
         private Thread _worker;
@@ -73,6 +74,8 @@ namespace SDRSharp.FobosSDR
             }
             lib_version = System.Text.Encoding.UTF8.GetString(buf0).TrimEnd('\0');
             drv_version = System.Text.Encoding.UTF8.GetString(buf1).TrimEnd('\0');
+            Array.Clear(buf0, 0, buf0.Length);
+            Array.Clear(buf1, 0, buf1.Length);
             unsafe
             {
                 fixed(byte* p_buf0 = &buf0[0]) fixed(byte* p_buf1 = &buf1[0]) fixed(byte* p_buf2 = &buf2[0]) fixed(byte* p_buf3 = &buf3[0]) fixed(byte* p_buf4 = &buf4[0])
@@ -82,6 +85,7 @@ namespace SDRSharp.FobosSDR
             }
             hw_revision = System.Text.Encoding.UTF8.GetString(buf0).TrimEnd('\0');
             fw_version = System.Text.Encoding.UTF8.GetString(buf1).TrimEnd('\0');
+
             serial = System.Text.Encoding.UTF8.GetString(buf4).TrimEnd('\0');
 
             Frequency = DefaultFrequency;
@@ -247,6 +251,18 @@ namespace SDRSharp.FobosSDR
                 }
             }
         }
+        unsafe public int UserGPO
+        {
+            get { return _UserGPO; }
+            set
+            {
+                _UserGPO = value;
+                if (_dev != IntPtr.Zero)
+                {
+                    NativeMethods.fobos_rx_set_user_gpo(_dev, (uint)_UserGPO);
+                }
+            }
+        }
 
         public bool IsStreaming
         {
@@ -271,22 +287,6 @@ namespace SDRSharp.FobosSDR
         {
             if (SamplesAvailable != null)
             {
-
-                //for (int i = 0; i < count; i++)
-                //{
-                //    Complex tmp = buffer[i * 4 + 1];
-                //    buffer[i * 4 + 1].Real = tmp.Imag;
-                //    buffer[i * 4 + 1].Imag = - tmp.Real;
-
-                //    tmp = buffer[i * 4 + 2];
-                //    buffer[i * 4 + 2].Real = -tmp.Real;
-                //    buffer[i * 4 + 2].Imag = -tmp.Imag;
-
-                //    tmp = buffer[i * 4 + 3];
-                //    buffer[i * 4 + 3].Real = -tmp.Imag;
-                //    buffer[i * 4 + 3].Imag = tmp.Real;
-                //}
-
                 if (_sampling_mode == 2)
                 {
                     int count = length / 4;
@@ -322,7 +322,6 @@ namespace SDRSharp.FobosSDR
                         buffer[i * 4 + 3].Imag = 0.0f;
                     }
                 }
-
                 _eventArgs.Buffer = buffer;
                 _eventArgs.Length = length;
                 SamplesAvailable(this, _eventArgs);

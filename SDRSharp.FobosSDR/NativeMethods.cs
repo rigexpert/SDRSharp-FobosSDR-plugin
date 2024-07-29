@@ -65,7 +65,7 @@ namespace SDRSharp.FobosSDR
         public static extern int fobos_rx_cancel_async(IntPtr dev);
 
         [DllImport(library_name, EntryPoint = "fobos_rx_set_user_gpo", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int fobos_rx_set_user_gpo(IntPtr dev, uint index);
+        public static extern int fobos_rx_set_user_gpo(IntPtr dev, uint value);
 
         [DllImport(library_name, EntryPoint = "fobos_rx_set_clk_source", CallingConvention = CallingConvention.Cdecl)]
         public static extern int fobos_rx_set_clk_source(IntPtr dev, int value);
