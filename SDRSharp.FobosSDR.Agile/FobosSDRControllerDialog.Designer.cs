@@ -1,4 +1,4 @@
-﻿namespace SDRSharp.FobosSDR
+﻿namespace SDRSharp.FobosSDR.Agile
 {
     partial class FobosSDRControllerDialog
     {
@@ -61,6 +61,8 @@
             this.checkBox_GPO5 = new System.Windows.Forms.CheckBox();
             this.checkBox_GPO6 = new System.Windows.Forms.CheckBox();
             this.checkBox_GPO7 = new System.Windows.Forms.CheckBox();
+            this.ComboBoxBW = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_LNA)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_VGA)).BeginInit();
             this.SuspendLayout();
@@ -116,7 +118,7 @@
             // TrackBar_LNA
             // 
             this.TrackBar_LNA.LargeChange = 1;
-            this.TrackBar_LNA.Location = new System.Drawing.Point(74, 218);
+            this.TrackBar_LNA.Location = new System.Drawing.Point(74, 245);
             this.TrackBar_LNA.Maximum = 3;
             this.TrackBar_LNA.Name = "TrackBar_LNA";
             this.TrackBar_LNA.Size = new System.Drawing.Size(204, 45);
@@ -127,7 +129,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 218);
+            this.label4.Location = new System.Drawing.Point(9, 245);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(53, 13);
             this.label4.TabIndex = 6;
@@ -135,7 +137,7 @@
             // 
             // close
             // 
-            this.close.Location = new System.Drawing.Point(213, 313);
+            this.close.Location = new System.Drawing.Point(213, 340);
             this.close.Name = "close";
             this.close.Size = new System.Drawing.Size(75, 23);
             this.close.TabIndex = 7;
@@ -151,7 +153,7 @@
             // TrackBar_VGA
             // 
             this.TrackBar_VGA.LargeChange = 1;
-            this.TrackBar_VGA.Location = new System.Drawing.Point(74, 251);
+            this.TrackBar_VGA.Location = new System.Drawing.Point(74, 278);
             this.TrackBar_VGA.Maximum = 31;
             this.TrackBar_VGA.Name = "TrackBar_VGA";
             this.TrackBar_VGA.Size = new System.Drawing.Size(204, 45);
@@ -162,7 +164,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 251);
+            this.label5.Location = new System.Drawing.Point(9, 278);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(54, 13);
             this.label5.TabIndex = 14;
@@ -222,7 +224,7 @@
             // CheckBox_ExternalClock
             // 
             this.CheckBox_ExternalClock.AutoSize = true;
-            this.CheckBox_ExternalClock.Location = new System.Drawing.Point(13, 316);
+            this.CheckBox_ExternalClock.Location = new System.Drawing.Point(13, 343);
             this.CheckBox_ExternalClock.Name = "CheckBox_ExternalClock";
             this.CheckBox_ExternalClock.Size = new System.Drawing.Size(93, 17);
             this.CheckBox_ExternalClock.TabIndex = 31;
@@ -284,7 +286,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(9, 284);
+            this.label10.Location = new System.Drawing.Point(9, 311);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(33, 13);
             this.label10.TabIndex = 37;
@@ -293,7 +295,7 @@
             // checkBox_GPO0
             // 
             this.checkBox_GPO0.AutoSize = true;
-            this.checkBox_GPO0.Location = new System.Drawing.Point(42, 283);
+            this.checkBox_GPO0.Location = new System.Drawing.Point(42, 310);
             this.checkBox_GPO0.Name = "checkBox_GPO0";
             this.checkBox_GPO0.Size = new System.Drawing.Size(32, 17);
             this.checkBox_GPO0.TabIndex = 38;
@@ -304,7 +306,7 @@
             // checkBox_GPO1
             // 
             this.checkBox_GPO1.AutoSize = true;
-            this.checkBox_GPO1.Location = new System.Drawing.Point(73, 283);
+            this.checkBox_GPO1.Location = new System.Drawing.Point(73, 310);
             this.checkBox_GPO1.Name = "checkBox_GPO1";
             this.checkBox_GPO1.Size = new System.Drawing.Size(32, 17);
             this.checkBox_GPO1.TabIndex = 39;
@@ -315,7 +317,7 @@
             // checkBox_GPO2
             // 
             this.checkBox_GPO2.AutoSize = true;
-            this.checkBox_GPO2.Location = new System.Drawing.Point(104, 283);
+            this.checkBox_GPO2.Location = new System.Drawing.Point(104, 310);
             this.checkBox_GPO2.Name = "checkBox_GPO2";
             this.checkBox_GPO2.Size = new System.Drawing.Size(32, 17);
             this.checkBox_GPO2.TabIndex = 40;
@@ -326,7 +328,7 @@
             // checkBox_GPO3
             // 
             this.checkBox_GPO3.AutoSize = true;
-            this.checkBox_GPO3.Location = new System.Drawing.Point(134, 283);
+            this.checkBox_GPO3.Location = new System.Drawing.Point(134, 310);
             this.checkBox_GPO3.Name = "checkBox_GPO3";
             this.checkBox_GPO3.Size = new System.Drawing.Size(32, 17);
             this.checkBox_GPO3.TabIndex = 41;
@@ -337,7 +339,7 @@
             // checkBox_GPO4
             // 
             this.checkBox_GPO4.AutoSize = true;
-            this.checkBox_GPO4.Location = new System.Drawing.Point(165, 283);
+            this.checkBox_GPO4.Location = new System.Drawing.Point(165, 310);
             this.checkBox_GPO4.Name = "checkBox_GPO4";
             this.checkBox_GPO4.Size = new System.Drawing.Size(32, 17);
             this.checkBox_GPO4.TabIndex = 42;
@@ -348,7 +350,7 @@
             // checkBox_GPO5
             // 
             this.checkBox_GPO5.AutoSize = true;
-            this.checkBox_GPO5.Location = new System.Drawing.Point(197, 283);
+            this.checkBox_GPO5.Location = new System.Drawing.Point(197, 310);
             this.checkBox_GPO5.Name = "checkBox_GPO5";
             this.checkBox_GPO5.Size = new System.Drawing.Size(32, 17);
             this.checkBox_GPO5.TabIndex = 43;
@@ -359,7 +361,7 @@
             // checkBox_GPO6
             // 
             this.checkBox_GPO6.AutoSize = true;
-            this.checkBox_GPO6.Location = new System.Drawing.Point(231, 283);
+            this.checkBox_GPO6.Location = new System.Drawing.Point(231, 310);
             this.checkBox_GPO6.Name = "checkBox_GPO6";
             this.checkBox_GPO6.Size = new System.Drawing.Size(32, 17);
             this.checkBox_GPO6.TabIndex = 44;
@@ -370,7 +372,7 @@
             // checkBox_GPO7
             // 
             this.checkBox_GPO7.AutoSize = true;
-            this.checkBox_GPO7.Location = new System.Drawing.Point(264, 283);
+            this.checkBox_GPO7.Location = new System.Drawing.Point(264, 310);
             this.checkBox_GPO7.Name = "checkBox_GPO7";
             this.checkBox_GPO7.Size = new System.Drawing.Size(32, 17);
             this.checkBox_GPO7.TabIndex = 45;
@@ -378,11 +380,42 @@
             this.checkBox_GPO7.UseVisualStyleBackColor = true;
             this.checkBox_GPO7.CheckedChanged += new System.EventHandler(this.checkBox_GPO0_CheckedChanged);
             // 
+            // ComboBoxBW
+            // 
+            this.ComboBoxBW.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBoxBW.FormattingEnabled = true;
+            this.ComboBoxBW.Items.AddRange(new object[] {
+            "100%",
+            "90%",
+            "80%",
+            "70%",
+            "60%",
+            "50%",
+            "40%",
+            "30%",
+            "20%"});
+            this.ComboBoxBW.Location = new System.Drawing.Point(131, 211);
+            this.ComboBoxBW.Name = "ComboBoxBW";
+            this.ComboBoxBW.Size = new System.Drawing.Size(157, 21);
+            this.ComboBoxBW.TabIndex = 47;
+            this.ComboBoxBW.SelectedIndexChanged += new System.EventHandler(this.ComboBoxBW_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(9, 219);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(100, 13);
+            this.label11.TabIndex = 46;
+            this.label11.Text = "Bandwidth (relative)";
+            // 
             // FobosSDRControllerDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(299, 345);
+            this.ClientSize = new System.Drawing.Size(299, 373);
+            this.Controls.Add(this.ComboBoxBW);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.checkBox_GPO7);
             this.Controls.Add(this.checkBox_GPO6);
             this.Controls.Add(this.checkBox_GPO5);
@@ -416,7 +449,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "FobosSDRControllerDialog";
-            this.Text = "Fobos SDR Controller";
+            this.Text = "Fobos SDR (agile) Controller";
             this.TopMost = true;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FobosSDRControllerDialog_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.TrackBar_LNA)).EndInit();
@@ -460,5 +493,7 @@
         private System.Windows.Forms.CheckBox checkBox_GPO5;
         private System.Windows.Forms.CheckBox checkBox_GPO6;
         private System.Windows.Forms.CheckBox checkBox_GPO7;
+        private System.Windows.Forms.ComboBox ComboBoxBW;
+        private System.Windows.Forms.Label label11;
     }
 }

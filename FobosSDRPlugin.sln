@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDRSharp.FobosSDR", "SDRSharp.FobosSDR\SDRSharp.FobosSDR.csproj", "{47D6B1CA-5F62-4B3E-AA77-E82DE359D9F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDRSharp.RTLSDR", "RTLSDR\SDRSharp.RTLSDR.csproj", "{66F804AC-2E08-4665-977A-0AFDB00CA70F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDRSharp.FobosSDR.Agile", "SDRSharp.FobosSDR.Agile\SDRSharp.FobosSDR.Agile.csproj", "{CF80A653-E0FE-4F64-8449-B63D484101BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,14 @@ Global
 		{66F804AC-2E08-4665-977A-0AFDB00CA70F}.Release|Any CPU.ActiveCfg = Release|x86
 		{66F804AC-2E08-4665-977A-0AFDB00CA70F}.Release|x86.ActiveCfg = Release|x86
 		{66F804AC-2E08-4665-977A-0AFDB00CA70F}.Release|x86.Build.0 = Release|x86
+		{CF80A653-E0FE-4F64-8449-B63D484101BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF80A653-E0FE-4F64-8449-B63D484101BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF80A653-E0FE-4F64-8449-B63D484101BF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CF80A653-E0FE-4F64-8449-B63D484101BF}.Debug|x86.Build.0 = Debug|Any CPU
+		{CF80A653-E0FE-4F64-8449-B63D484101BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF80A653-E0FE-4F64-8449-B63D484101BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF80A653-E0FE-4F64-8449-B63D484101BF}.Release|x86.ActiveCfg = Release|Any CPU
+		{CF80A653-E0FE-4F64-8449-B63D484101BF}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

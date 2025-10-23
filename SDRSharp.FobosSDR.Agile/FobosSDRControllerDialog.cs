@@ -24,7 +24,7 @@ using System.Globalization;
 using System.Text;
 using System.Windows.Forms;
 
-namespace SDRSharp.FobosSDR
+namespace SDRSharp.FobosSDR.Agile
 {
     public partial class FobosSDRControllerDialog : Form
     {
@@ -38,19 +38,24 @@ namespace SDRSharp.FobosSDR
 
         public void LoadSettings()
         {
-            samplerateComboBox.SelectedIndex = Utils.GetIntSetting("FobosSDR.SampleRateIdx", 4);
+            samplerateComboBox.SelectedIndex = Utils.GetIntSetting("FobosSDR.Agile.SampleRateIdx", 4);
             if (samplerateComboBox.SelectedIndex < 0)
             {
                 samplerateComboBox.SelectedIndex = 0;
             }
-            ComboBox_Input.SelectedIndex = Utils.GetIntSetting("FobosSDR.SamplingMode", 0);
+            ComboBoxBW.SelectedIndex = Utils.GetIntSetting("FobosSDR.Agile.AutoBandWidth", 1);
+            if (ComboBoxBW.SelectedIndex < 0)
+            {
+                ComboBoxBW.SelectedIndex = 0;
+            }
+            ComboBox_Input.SelectedIndex = Utils.GetIntSetting("FobosSDR.Agile.SamplingMode", 0);
             if (ComboBox_Input.SelectedIndex < 0)
             {
                 ComboBox_Input.SelectedIndex = 0;
             }
-            CheckBox_ExternalClock.Checked = Utils.GetBooleanSetting("FobosSDR.ExternalClock", false);
-            TrackBar_LNA.Value = Utils.GetIntSetting("FobosSDR.LNA", 0);
-            TrackBar_VGA.Value = Utils.GetIntSetting("FobosSDR.VGA", 0);
+            CheckBox_ExternalClock.Checked = Utils.GetBooleanSetting("FobosSDR.Agile.ExternalClock", false);
+            TrackBar_LNA.Value = Utils.GetIntSetting("FobosSDR.Agile.LNA", 0);
+            TrackBar_VGA.Value = Utils.GetIntSetting("FobosSDR.Agile.VGA", 0);
         }
         public void SelectDevice()
         {
@@ -64,6 +69,7 @@ namespace SDRSharp.FobosSDR
             TextBox_Board.Text = _owner.BoardInfo;
             TextBox_Serial.Text = _owner.Serial;
         }
+
         private void close_Click(object sender, EventArgs e)
         {
             Close();
@@ -83,7 +89,7 @@ namespace SDRSharp.FobosSDR
                 var sampleRate = double.Parse(samplerateString, CultureInfo.InvariantCulture);
                 _owner.Samplerate = sampleRate * 1000000.0;
             }
-            Utils.SaveSetting("FobosSDR.SampleRateIdx", samplerateComboBox.SelectedIndex);
+            Utils.SaveSetting("FobosSDR.Agile.SampleRateIdx", samplerateComboBox.SelectedIndex);
         }
 
         private void deviceComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -107,7 +113,7 @@ namespace SDRSharp.FobosSDR
             {
                 _owner.ExternalClock = Convert.ToInt32(CheckBox_ExternalClock.Checked);
             }
-            Utils.SaveSetting("FobosSDR.ExternalClock", CheckBox_ExternalClock.Checked);
+            Utils.SaveSetting("FobosSDR.Agile.ExternalClock", CheckBox_ExternalClock.Checked);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -121,6 +127,7 @@ namespace SDRSharp.FobosSDR
                     deviceComboBox.Enabled = !_owner.IsStreaming;
                     TextBox_CenterFrequency.Enabled = (_owner.SamplingMode == 0) || (_owner.SamplingMode == 1);
                     button_SetCenterFrequency.Enabled = (_owner.SamplingMode == 0) || (_owner.SamplingMode == 1);
+                    ComboBoxBW.Enabled = true;
                     TrackBar_LNA.Enabled = (_owner.SamplingMode == 0);
                     TrackBar_VGA.Enabled = (_owner.SamplingMode == 0);
                     if ((!TextBox_CenterFrequency.Focused) && (!this.Focused) && (!button_SetCenterFrequency.Focused))
@@ -135,6 +142,7 @@ namespace SDRSharp.FobosSDR
                     samplerateComboBox.Enabled = false;
                     TextBox_CenterFrequency.Enabled = false;
                     button_SetCenterFrequency.Enabled = false;
+                    ComboBoxBW.Enabled = false;
                     TrackBar_LNA.Enabled = false;
                     TrackBar_VGA.Enabled = false;
                     CheckBox_ExternalClock.Enabled = false;
@@ -160,7 +168,7 @@ namespace SDRSharp.FobosSDR
             {
                 _owner.SamplingMode = ComboBox_Input.SelectedIndex;
             }
-            Utils.SaveSetting("FobosSDR.SamplingMode", ComboBox_Input.SelectedIndex);
+            Utils.SaveSetting("FobosSDR.Agile.SamplingMode", ComboBox_Input.SelectedIndex);
         }
 
         private void checkBox_GPO0_CheckedChanged(object sender, EventArgs e)
@@ -180,13 +188,24 @@ namespace SDRSharp.FobosSDR
             }
         }
 
+        private void ComboBoxBW_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_owner != null)
+            {
+                var str = ComboBoxBW.Items[ComboBoxBW.SelectedIndex].ToString().TrimEnd('%');
+                var abw = double.Parse(str, CultureInfo.InvariantCulture);
+                _owner.AutoBandWidth = abw * 0.01;
+            }
+            Utils.SaveSetting("FobosSDR.Agile.AutoBandWidth", ComboBoxBW.SelectedIndex);
+        }
+
         private void TrackBar_LNA_ValueChanged(object sender, EventArgs e)
         {
             if (_owner != null)
             {
                 _owner.LNAgain = TrackBar_LNA.Value;
             }
-            Utils.SaveSetting("FobosSDR.LNA", TrackBar_LNA.Value);
+            Utils.SaveSetting("FobosSDR.Agile.LNA", TrackBar_LNA.Value);
         }
 
         private void TrackBar_VGA_ValueChanged(object sender, EventArgs e)
@@ -195,7 +214,7 @@ namespace SDRSharp.FobosSDR
             {
                 _owner.VGAgain = TrackBar_VGA.Value;
             }
-            Utils.SaveSetting("FobosSDR.VGA", TrackBar_VGA.Value);
+            Utils.SaveSetting("FobosSDR.Agile.VGA", TrackBar_VGA.Value);
         }
     }
 }

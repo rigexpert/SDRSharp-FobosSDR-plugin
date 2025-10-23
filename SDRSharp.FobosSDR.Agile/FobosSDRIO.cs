@@ -6,11 +6,10 @@
 //   /  /\ \   / / /  /_/ / / /___   /   /  / /_/ / /  ___/ / /     / /_
 //  /_ /  \_\ /_/  \__   / /______/ /_/\_\ / ____/  \____/ /_/      \___/
 //               /______/                 /_/             
-//  Fobos SDR API library
+//  Fobos SDR (agile) special API library
 //  C# .Net API wrapper for SDR# plugin
 //  Copyright (C) Rig Expert Ukraine Ltd.
-//  2024.04.04
-//  2025.01.22 - update
+//  2025.01.19
 //==============================================================================
 using System;
 using System.Diagnostics;
@@ -19,7 +18,7 @@ using SDRSharp;
 using SDRSharp.Common;
 using SDRSharp.Radio;
 //==============================================================================
-namespace SDRSharp.FobosSDR
+namespace SDRSharp.FobosSDR.Agile
 {
     public unsafe class FobosSDRIO : 
         IFrontendController, 
@@ -34,6 +33,7 @@ namespace SDRSharp.FobosSDR
         private Radio.SamplesAvailableDelegate _callback;
         private double _frequency = 100000000;
         private double _sampleRate = 25000000.0;
+        private double _abw = 0.9;
         private int _sampling_mode = 0;
         private bool _can_tune = true;
         private int _external_clock = 0;
@@ -43,7 +43,7 @@ namespace SDRSharp.FobosSDR
         public string ApiInfo;
         public string BoardInfo;
         public string Serial;
-        public string [] Devices;
+        public string[] Devices;
         //======================================================================
         public FobosSDRIO()
         {
@@ -74,7 +74,7 @@ namespace SDRSharp.FobosSDR
             {
                 fixed (byte* p_buf = &buf[0])
                 {
-                    count = NativeMethods.fobos_rx_list_devices(p_buf);
+                    count = NativeMethods.fobos_sdr_list_devices(p_buf);
                 }
             }
             string serials_str = System.Text.Encoding.UTF8.GetString(buf).TrimEnd('\0');
@@ -105,6 +105,7 @@ namespace SDRSharp.FobosSDR
                     _dev = new FobosSDRDevice((uint)index);
                     _dev.Frequency = _frequency;
                     _dev.Samplerate = _sampleRate;
+                    _dev.AutoBandWidth = _abw;
                     _dev.SamplingMode = _sampling_mode;
                     _dev.ExternalClock = _external_clock;
                     _dev.LNAgain = _LNA_Gain;
@@ -152,7 +153,7 @@ namespace SDRSharp.FobosSDR
                     }
                     catch (ApplicationException)
                     {
-                        MessageBox.Show("FobosSDR: Could not open device #" + _index);
+                        MessageBox.Show("FobosSDR: Could not open device" + _index);
                     }
                 }
             }
@@ -239,6 +240,22 @@ namespace SDRSharp.FobosSDR
                     _dev.Samplerate = value;
                 }
                 UpdateMainForm();
+            }
+        }
+        //======================================================================
+        public double AutoBandWidth
+        {
+            get
+            {
+                return _dev == null ? 0.0 : _dev.AutoBandWidth;
+            }
+            set
+            {
+                _abw = value;
+                if (_dev != null)
+                {
+                    _dev.AutoBandWidth = value;
+                }
             }
         }
         //======================================================================
@@ -442,4 +459,3 @@ namespace SDRSharp.FobosSDR
         //======================================================================
     }
 }
-//==============================================================================
