@@ -10,6 +10,7 @@
 //  C# .Net API wrapper for SDR# plugin
 //  Copyright (C) Rig Expert Ukraine Ltd.
 //  2025.01.19
+//  2026.03.25 - add support for hw.rev.4
 //==============================================================================
 using System;
 using System.Runtime.InteropServices;
@@ -28,16 +29,19 @@ namespace SDRSharp.FobosSDR.Agile
         public unsafe static extern int fobos_sdr_get_api_info(byte * lib_version, byte* drv_version);
 
         [DllImport(library_name, EntryPoint = "fobos_sdr_get_device_count", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int fobos_sdr_get_device_count();
+        public unsafe static extern int fobos_sdr_get_device_count();
 
         [DllImport(library_name, EntryPoint = "fobos_sdr_list_devices", CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern int fobos_sdr_list_devices(byte* serials);
 
         [DllImport(library_name, EntryPoint = "fobos_sdr_open", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int fobos_sdr_open(out IntPtr dev, uint index);
+        public unsafe static extern int fobos_sdr_open(out IntPtr dev, uint index);
 
         [DllImport(library_name, EntryPoint = "fobos_sdr_close", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int fobos_sdr_close(IntPtr dev);
+        public unsafe static extern int fobos_sdr_close(IntPtr dev);
+
+        [DllImport(library_name, EntryPoint = "fobos_sdr_reset", CallingConvention = CallingConvention.Cdecl)]
+        public unsafe static extern int fobos_sdr_reset(IntPtr dev);
 
         [DllImport(library_name, EntryPoint = "fobos_sdr_get_board_info", CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern int fobos_sdr_get_board_info(IntPtr dev, byte * hw_revision, byte * fw_version, byte* manufacturer, byte* product, byte*  serial);
@@ -58,13 +62,13 @@ namespace SDRSharp.FobosSDR.Agile
         public unsafe static extern int fobos_sdr_is_scanning(IntPtr dev);
 
         [DllImport(library_name, EntryPoint = "fobos_sdr_set_direct_sampling", CallingConvention = CallingConvention.Cdecl)]
-        public unsafe static extern int fobos_sdr_set_direct_sampling(IntPtr dev, int value);
+        public unsafe static extern int fobos_sdr_set_direct_sampling(IntPtr dev, uint value);
 
         [DllImport(library_name, EntryPoint = "fobos_sdr_set_lna_gain", CallingConvention = CallingConvention.Cdecl)]
-        public unsafe static extern int fobos_sdr_set_lna_gain(IntPtr dev, int value);
+        public unsafe static extern int fobos_sdr_set_lna_gain(IntPtr dev, uint value);
 
         [DllImport(library_name, EntryPoint = "fobos_sdr_set_vga_gain", CallingConvention = CallingConvention.Cdecl)]
-        public unsafe static extern int fobos_sdr_set_vga_gain(IntPtr dev, int value);
+        public unsafe static extern int fobos_sdr_set_vga_gain(IntPtr dev, uint value);
 
         [DllImport(library_name, EntryPoint = "fobos_sdr_get_samplerates", CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern int fobos_sdr_get_samplerates(IntPtr dev, double* values, uint* count);
@@ -88,6 +92,28 @@ namespace SDRSharp.FobosSDR.Agile
         public unsafe static extern int fobos_sdr_set_user_gpo(IntPtr dev, uint value);
 
         [DllImport(library_name, EntryPoint = "fobos_sdr_set_clk_source", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int fobos_sdr_set_clk_source(IntPtr dev, int value);
+        public unsafe static extern int fobos_sdr_set_clk_source(IntPtr dev, uint value);
+		
+        [DllImport(library_name, EntryPoint = "fobos_sdr_start_sync", CallingConvention = CallingConvention.Cdecl)]
+        public unsafe static extern int fobos_sdr_start_sync(IntPtr dev, uint buf_length);
+		
+        [DllImport(library_name, EntryPoint = "fobos_sdr_read_sync", CallingConvention = CallingConvention.Cdecl)]
+        public unsafe static extern int fobos_sdr_read_sync(IntPtr dev, float * buff, uint * actual_buf_length);
+
+        [DllImport(library_name, EntryPoint = "fobos_sdr_stop_sync", CallingConvention = CallingConvention.Cdecl)]
+        public unsafe static extern int fobos_sdr_stop_sync(IntPtr dev);
+		
+        [DllImport(library_name, EntryPoint = "fobos_sdr_read_firmware", CallingConvention = CallingConvention.Cdecl)]
+        public unsafe static extern int fobos_sdr_read_firmware(IntPtr dev, byte * file_name, uint verbose);
+
+        [DllImport(library_name, EntryPoint = "fobos_sdr_write_firmware", CallingConvention = CallingConvention.Cdecl)]
+        public unsafe static extern int fobos_sdr_write_firmware(IntPtr dev, byte * file_name, uint verbose);
+
+        [DllImport(library_name, EntryPoint = "fobos_sdr_read_user", CallingConvention = CallingConvention.Cdecl)]
+        public unsafe static extern int fobos_sdr_read_user(IntPtr dev, byte * data, uint size);
+
+        [DllImport(library_name, EntryPoint = "fobos_sdr_write_user", CallingConvention = CallingConvention.Cdecl)]
+        public unsafe static extern int fobos_sdr_write_user(IntPtr dev, byte * data, uint size);
+
     }
 }

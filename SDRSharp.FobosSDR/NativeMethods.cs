@@ -10,6 +10,7 @@
 //  C# .Net API wrapper for SDR# plugin
 //  Copyright (C) Rig Expert Ukraine Ltd.
 //  2024.04.04
+//  2026.03.25 - fobos_rx_get_samplerates
 //==============================================================================
 using System;
 using System.Runtime.InteropServices;
@@ -54,6 +55,9 @@ namespace SDRSharp.FobosSDR
 
         [DllImport(library_name, EntryPoint = "fobos_rx_set_vga_gain", CallingConvention = CallingConvention.Cdecl)]
         public static extern int fobos_rx_set_vga_gain(IntPtr dev, int value);
+
+        [DllImport(library_name, EntryPoint = "fobos_rx_get_samplerates", CallingConvention = CallingConvention.Cdecl)]
+        public unsafe static extern int fobos_rx_get_samplerates(IntPtr dev, double* values, uint* count);
 
         [DllImport(library_name, EntryPoint = "fobos_rx_set_samplerate", CallingConvention = CallingConvention.Cdecl)]
         public unsafe static extern uint fobos_rx_set_samplerate(IntPtr dev, double rate, double* actual);

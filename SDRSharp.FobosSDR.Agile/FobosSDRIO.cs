@@ -10,6 +10,7 @@
 //  C# .Net API wrapper for SDR# plugin
 //  Copyright (C) Rig Expert Ukraine Ltd.
 //  2025.01.19
+//  2026.03.25 - add support for hw.rev.4
 //==============================================================================
 using System;
 using System.Diagnostics;
@@ -34,16 +35,17 @@ namespace SDRSharp.FobosSDR.Agile
         private double _frequency = 100000000;
         private double _sampleRate = 25000000.0;
         private double _abw = 0.9;
-        private int _sampling_mode = 0;
+        private uint _sampling_mode = 0;
         private bool _can_tune = true;
-        private int _external_clock = 0;
-        private int _LNA_Gain = 0;
-        private int _VGA_Gain = 0;
+        private uint _external_clock = 0;
+        private uint _LNA_Gain = 0;
+        private uint _VGA_Gain = 0;
         public SDRSharp.MainForm _main;
         public string ApiInfo;
         public string BoardInfo;
         public string Serial;
         public string[] Devices;
+        public double[] Samplerates;
         //======================================================================
         public FobosSDRIO()
         {
@@ -110,6 +112,7 @@ namespace SDRSharp.FobosSDR.Agile
                     _dev.ExternalClock = _external_clock;
                     _dev.LNAgain = _LNA_Gain;
                     _dev.VGAgain = _VGA_Gain;
+                    Samplerates = _dev.samplerates;
                     ApiInfo = "lib v." + _dev.lib_version + " drv " + _dev.drv_version;
                     BoardInfo = "HW: r." + _dev.hw_revision + " FV: v." + _dev.fw_version;
                     Serial = _dev.serial;
@@ -282,7 +285,7 @@ namespace SDRSharp.FobosSDR.Agile
             }
         }
         //======================================================================
-        unsafe public int SamplingMode
+        unsafe public uint SamplingMode
         {
             get { return _sampling_mode; }
             set
@@ -299,7 +302,7 @@ namespace SDRSharp.FobosSDR.Agile
             }
         }
         //======================================================================
-        unsafe public int ExternalClock
+        unsafe public uint ExternalClock
         {
             get { return _external_clock;}
             set
@@ -312,7 +315,7 @@ namespace SDRSharp.FobosSDR.Agile
             }
         }
         //======================================================================
-        public int LNAgain
+        public uint LNAgain
         {
             get
             {
@@ -334,7 +337,7 @@ namespace SDRSharp.FobosSDR.Agile
             }
         }
         //======================================================================
-        public int VGAgain
+        public uint VGAgain
         {
             get
             {
@@ -449,7 +452,7 @@ namespace SDRSharp.FobosSDR.Agile
             }
         }
         //======================================================================
-        public void SetUserGPO(Int32 value)
+        public void SetUserGPO(uint value)
         {
             if (_dev != null)
             {

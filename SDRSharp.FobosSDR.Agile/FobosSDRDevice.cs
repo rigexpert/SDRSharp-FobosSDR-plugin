@@ -10,6 +10,7 @@
 //  C# .Net API wrapper for SDR# plugin
 //  Copyright (C) Rig Expert Ukraine Ltd.
 //  2025.01.19
+//  2026.03.25 - add support for hw.rev.4
 //==============================================================================
 using SDRSharp.Radio;
 using System;
@@ -33,12 +34,12 @@ namespace SDRSharp.FobosSDR.Agile
         private double _frequency = DefaultFrequency;
         private double _sampleRate = DefaultSamplerate;
         private double _abw = 0.9;
-        private int _sampling_mode = 0;
+        private uint _sampling_mode = 0;
         private double _before_direct_sampling_frequency = 0.0;
-        private int _external_clock = 0;
-        private int _LNA_Gain = 0;
-        private int _VGA_Gain = 0;
-        private int _UserGPO = 0;
+        private uint _external_clock = 0;
+        private uint _LNA_Gain = 0;
+        private uint _VGA_Gain = 0;
+        private uint _UserGPO = 0;
 
         private GCHandle _gcHandle;
         private Thread _worker;
@@ -49,6 +50,7 @@ namespace SDRSharp.FobosSDR.Agile
         public string hw_revision;
         public string fw_version;
         public string serial;
+        public double[] samplerates;
         //======================================================================
         public FobosSDRDevice(uint index)
         {
@@ -87,6 +89,21 @@ namespace SDRSharp.FobosSDR.Agile
             fw_version = System.Text.Encoding.UTF8.GetString(buf1).TrimEnd('\0');
 
             serial = System.Text.Encoding.UTF8.GetString(buf4).TrimEnd('\0');
+
+
+            uint count = 0;
+            unsafe
+            {
+                NativeMethods.fobos_sdr_get_samplerates(_dev, null, &count);
+            }
+            samplerates = new double[count];
+            unsafe
+            {
+                fixed (double* srates = &samplerates[0])
+                {
+                    NativeMethods.fobos_sdr_get_samplerates(_dev, srates, null);
+                }
+            }
 
             Frequency = DefaultFrequency;
             Samplerate = DefaultSamplerate;
@@ -205,13 +222,13 @@ namespace SDRSharp.FobosSDR.Agile
             }
         }
         //======================================================================
-        unsafe public int SamplingMode
+        unsafe public uint SamplingMode
         {
             get { return _sampling_mode; }
             set
             {
                 int result = 0;
-                int direct = 1;
+                uint direct = 1;
                 if (_sampling_mode != value)
                 {
                     if (_dev != IntPtr.Zero)
@@ -237,7 +254,7 @@ namespace SDRSharp.FobosSDR.Agile
             }
         }
         //======================================================================
-        unsafe public int ExternalClock
+        unsafe public uint ExternalClock
         {
             get { return _external_clock ; }
             set
@@ -250,7 +267,7 @@ namespace SDRSharp.FobosSDR.Agile
             }
         }
         //======================================================================
-        unsafe public int LNAgain
+        unsafe public uint LNAgain
         {
             get { return _LNA_Gain; }
             set
@@ -263,7 +280,7 @@ namespace SDRSharp.FobosSDR.Agile
             }
         }
         //======================================================================
-        unsafe public int VGAgain
+        unsafe public uint VGAgain
         {
             get { return _VGA_Gain; }
             set
@@ -276,7 +293,7 @@ namespace SDRSharp.FobosSDR.Agile
             }
         }
         //======================================================================
-        unsafe public int UserGPO
+        unsafe public uint UserGPO
         {
             get { return _UserGPO; }
             set

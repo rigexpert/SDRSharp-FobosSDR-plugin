@@ -38,6 +38,13 @@ namespace SDRSharp.FobosSDR
 
         public void LoadSettings()
         {
+            samplerateComboBox.Items.Clear();
+            foreach (var sr in _owner.Samplerates)
+            {
+                string str = Convert.ToString(sr);
+                samplerateComboBox.Items.Add(str);
+            }
+
             samplerateComboBox.SelectedIndex = Utils.GetIntSetting("FobosSDR.SampleRateIdx", 4);
             if (samplerateComboBox.SelectedIndex < 0)
             {
@@ -81,7 +88,7 @@ namespace SDRSharp.FobosSDR
             {
                 var samplerateString = samplerateComboBox.Items[samplerateComboBox.SelectedIndex].ToString().Split(' ')[0];
                 var sampleRate = double.Parse(samplerateString, CultureInfo.InvariantCulture);
-                _owner.Samplerate = sampleRate * 1000000.0;
+                _owner.Samplerate = sampleRate;
             }
             Utils.SaveSetting("FobosSDR.SampleRateIdx", samplerateComboBox.SelectedIndex);
         }

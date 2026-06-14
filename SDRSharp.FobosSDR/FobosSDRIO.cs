@@ -44,6 +44,7 @@ namespace SDRSharp.FobosSDR
         public string BoardInfo;
         public string Serial;
         public string [] Devices;
+        public double[] Samplerates;
         //======================================================================
         public FobosSDRIO()
         {
@@ -109,6 +110,7 @@ namespace SDRSharp.FobosSDR
                     _dev.ExternalClock = _external_clock;
                     _dev.LNAgain = _LNA_Gain;
                     _dev.VGAgain = _VGA_Gain;
+                    Samplerates = _dev.samplerates;
                     ApiInfo = "lib v." + _dev.lib_version + " drv " + _dev.drv_version;
                     BoardInfo = "HW: r." + _dev.hw_revision + " FV: v." + _dev.fw_version;
                     Serial = _dev.serial;

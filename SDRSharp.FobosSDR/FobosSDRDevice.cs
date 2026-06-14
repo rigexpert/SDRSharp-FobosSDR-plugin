@@ -49,6 +49,7 @@ namespace SDRSharp.FobosSDR
         public string hw_revision;
         public string fw_version;
         public string serial;
+        public double[] samplerates;
 
         public FobosSDRDevice(uint index)
         {
@@ -87,6 +88,20 @@ namespace SDRSharp.FobosSDR
             fw_version = System.Text.Encoding.UTF8.GetString(buf1).TrimEnd('\0');
 
             serial = System.Text.Encoding.UTF8.GetString(buf4).TrimEnd('\0');
+
+            uint count = 0;
+            unsafe
+            {
+                NativeMethods.fobos_rx_get_samplerates(_dev, null, &count);
+            }
+            samplerates = new double[count];
+            unsafe
+            {
+                fixed (double* srates = &samplerates[0])
+                {
+                    NativeMethods.fobos_rx_get_samplerates(_dev, srates, null);
+                }
+            }
 
             Frequency = DefaultFrequency;
             Samplerate = DefaultSamplerate;

@@ -12,6 +12,7 @@
 //  2024.04.04
 //  2024.04.25 - update
 //  2025.01.22 - update
+//  2026.03.25 - add support for hw.rev.4
 //==============================================================================
 using SDRSharp.Radio;
 using System;
@@ -38,6 +39,13 @@ namespace SDRSharp.FobosSDR.Agile
 
         public void LoadSettings()
         {
+            samplerateComboBox.Items.Clear();
+            foreach (var sr in _owner.Samplerates)
+            {
+                string str = Convert.ToString(sr);
+                samplerateComboBox.Items.Add(str);
+            }
+
             samplerateComboBox.SelectedIndex = Utils.GetIntSetting("FobosSDR.Agile.SampleRateIdx", 4);
             if (samplerateComboBox.SelectedIndex < 0)
             {
@@ -87,7 +95,7 @@ namespace SDRSharp.FobosSDR.Agile
             {
                 var samplerateString = samplerateComboBox.Items[samplerateComboBox.SelectedIndex].ToString().Split(' ')[0];
                 var sampleRate = double.Parse(samplerateString, CultureInfo.InvariantCulture);
-                _owner.Samplerate = sampleRate * 1000000.0;
+                _owner.Samplerate = sampleRate;
             }
             Utils.SaveSetting("FobosSDR.Agile.SampleRateIdx", samplerateComboBox.SelectedIndex);
         }
@@ -111,7 +119,7 @@ namespace SDRSharp.FobosSDR.Agile
         {
             if (_owner != null)
             {
-                _owner.ExternalClock = Convert.ToInt32(CheckBox_ExternalClock.Checked);
+                _owner.ExternalClock = Convert.ToUInt32(CheckBox_ExternalClock.Checked);
             }
             Utils.SaveSetting("FobosSDR.Agile.ExternalClock", CheckBox_ExternalClock.Checked);
         }
@@ -166,7 +174,7 @@ namespace SDRSharp.FobosSDR.Agile
             }
             if (_owner != null)
             {
-                _owner.SamplingMode = ComboBox_Input.SelectedIndex;
+                _owner.SamplingMode = (uint)ComboBox_Input.SelectedIndex;
             }
             Utils.SaveSetting("FobosSDR.Agile.SamplingMode", ComboBox_Input.SelectedIndex);
         }
@@ -175,15 +183,15 @@ namespace SDRSharp.FobosSDR.Agile
         {
             if (_owner != null)
             {
-                int gpo_value = 0;
-                gpo_value |= (Convert.ToInt32(checkBox_GPO0.Checked) << 0);
-                gpo_value |= (Convert.ToInt32(checkBox_GPO1.Checked) << 1);
-                gpo_value |= (Convert.ToInt32(checkBox_GPO2.Checked) << 2);
-                gpo_value |= (Convert.ToInt32(checkBox_GPO3.Checked) << 3);
-                gpo_value |= (Convert.ToInt32(checkBox_GPO4.Checked) << 4);
-                gpo_value |= (Convert.ToInt32(checkBox_GPO5.Checked) << 5);
-                gpo_value |= (Convert.ToInt32(checkBox_GPO6.Checked) << 6);
-                gpo_value |= (Convert.ToInt32(checkBox_GPO7.Checked) << 7);
+                uint gpo_value = 0;
+                gpo_value |= (Convert.ToUInt32(checkBox_GPO0.Checked) << 0);
+                gpo_value |= (Convert.ToUInt32(checkBox_GPO1.Checked) << 1);
+                gpo_value |= (Convert.ToUInt32(checkBox_GPO2.Checked) << 2);
+                gpo_value |= (Convert.ToUInt32(checkBox_GPO3.Checked) << 3);
+                gpo_value |= (Convert.ToUInt32(checkBox_GPO4.Checked) << 4);
+                gpo_value |= (Convert.ToUInt32(checkBox_GPO5.Checked) << 5);
+                gpo_value |= (Convert.ToUInt32(checkBox_GPO6.Checked) << 6);
+                gpo_value |= (Convert.ToUInt32(checkBox_GPO7.Checked) << 7);
                 _owner.SetUserGPO(gpo_value);
             }
         }
@@ -203,7 +211,7 @@ namespace SDRSharp.FobosSDR.Agile
         {
             if (_owner != null)
             {
-                _owner.LNAgain = TrackBar_LNA.Value;
+                _owner.LNAgain = (uint)TrackBar_LNA.Value;
             }
             Utils.SaveSetting("FobosSDR.Agile.LNA", TrackBar_LNA.Value);
         }
@@ -212,7 +220,7 @@ namespace SDRSharp.FobosSDR.Agile
         {
             if (_owner != null)
             {
-                _owner.VGAgain = TrackBar_VGA.Value;
+                _owner.VGAgain = (uint)TrackBar_VGA.Value;
             }
             Utils.SaveSetting("FobosSDR.Agile.VGA", TrackBar_VGA.Value);
         }

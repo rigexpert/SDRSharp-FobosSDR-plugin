@@ -97,16 +97,6 @@
             // 
             this.samplerateComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.samplerateComboBox.FormattingEnabled = true;
-            this.samplerateComboBox.Items.AddRange(new object[] {
-            "50 MSpS",
-            "40 MSpS",
-            "32 MSpS",
-            "25 MSpS",
-            "20 MSpS",
-            "16 MSpS",
-            "12.5 MSpS",
-            "10 MSpS",
-            "8 MSpS"});
             this.samplerateComboBox.Location = new System.Drawing.Point(131, 184);
             this.samplerateComboBox.Name = "samplerateComboBox";
             this.samplerateComboBox.Size = new System.Drawing.Size(157, 21);
