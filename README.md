@@ -1,19 +1,19 @@
 # SDRSharp-FobosSDR-plugin
 SDR# frontend plugin for FobosSDR device API. 
-Full source code. SDR# v.1716 compatible.
+Full source code. SDR# v.1716 and v.1732 compatible.
 
 ## Dependencies
 
 - .Net v.4.6
 - MS Visual Studio 2015
-- SDR# v.1716 SDK
+- SDR# v.1716 or v.1732 SDK
 
 
 ## How to build
 
 - clone
 - make **Debug** and/or **Release** directories
-- dowbload SDR# v.1716 SDK, unpack to **Debug** and/or **Release** 
+- dowbload SDR# v.1716 or v.1732 SDK, unpack to **Debug** and/or **Release** 
 - open FobosSDRPlugin.sln
 - Build and run (all dependencies are portable)
 
